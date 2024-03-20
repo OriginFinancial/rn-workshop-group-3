@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "types";
@@ -17,6 +17,14 @@ function Pokemon({
   return (
     <View style={styles.container}>
       <Text>Pokemon: {id}</Text>
+      <Button
+        title="Go to webview"
+        onPress={() =>
+          navigation.navigate("Webview", {
+            uri: "https://br.search.yahoo.com/",
+          })
+        }
+      />
       <StatusBar style="auto" />
     </View>
   );

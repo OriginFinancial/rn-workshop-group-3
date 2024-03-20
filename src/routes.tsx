@@ -1,9 +1,12 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Button } from "react-native";
 
 import Home from "./screens/home";
 import Pokedex from "./screens/pokedex";
 import Pokemon from "./screens/pokemon";
+import Webview from "./screens/webview";
+
 import { RootStackParamList } from "types";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -17,8 +20,28 @@ function Routes() {
           component={Home}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Pokedex" component={Pokedex} />
+        <Stack.Screen
+          name="Pokedex"
+          component={Pokedex}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <Button
+                title="webview"
+                onPress={() =>
+                  navigation.navigate("Webview", {
+                    uri: "https://www.google.com/",
+                  })
+                }
+              />
+            ),
+          })}
+        />
         <Stack.Screen name="Pokemon" component={Pokemon} />
+        <Stack.Screen
+          name="Webview"
+          component={Webview}
+          options={{ presentation: "modal" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
