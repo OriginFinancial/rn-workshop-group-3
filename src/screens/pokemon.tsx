@@ -1,16 +1,22 @@
 import { StatusBar } from "expo-status-bar";
-import { Button, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import React, { useLayoutEffect } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "types";
 
-function Home({
+function Pokemon({
   navigation,
-}: NativeStackScreenProps<RootStackParamList, "Home">) {
+  route,
+}: NativeStackScreenProps<RootStackParamList, "Pokemon">) {
+  const { id } = route.params;
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ title: id });
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <Button title="Pokedex" onPress={() => navigation.navigate("Pokedex")} />
+      <Text>Pokemon: {id}</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -25,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default Pokemon;

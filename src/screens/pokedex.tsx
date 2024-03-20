@@ -1,13 +1,34 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, FlatList, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "types";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-function Pokedex() {
+function Pokedex({
+  navigation,
+}: NativeStackScreenProps<RootStackParamList, "Pokedex">) {
   return (
     <View style={styles.container}>
-      <Text>Pokedex</Text>
+      <FlatList
+        data={[
+          { key: "Devin" },
+          { key: "Dan" },
+          { key: "Dominic" },
+          { key: "Jackson" },
+          { key: "James" },
+          { key: "Joel" },
+          { key: "John" },
+          { key: "Jillian" },
+          { key: "Jimmy" },
+          { key: "Julie" },
+        ]}
+        renderItem={({ item }) => (
+          <Button
+            title={item.key}
+            onPress={() => navigation.navigate("Pokemon", { id: item.key })}
+          />
+        )}
+      />
       <StatusBar style="auto" />
     </View>
   );
